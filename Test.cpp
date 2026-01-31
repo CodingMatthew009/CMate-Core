@@ -17,13 +17,37 @@ int main(void)
     std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     LOG("Initialized logging...", utils::LFlags::INFO);
     
-    double myDouble = 251.2;
+    double myDouble = 251.22943712;
+    int myInt = 52;
+    float myFloat = 23.42;
+
+    bool myBool = true;
 
     utils::SDManager::Instance().SetSaveFile("/home/cmate/Documents/MateUtilities/Save_File.odt");
-    //utils::SDManager::Instance().SaveData(myDouble);
+    /*
+    utils::SDManager::Instance().SaveData(myDouble, GET_VARIABLE_NAME(myDouble));
+    utils::SDManager::Instance().SaveData(myInt,    GET_VARIABLE_NAME(myInt));
+    utils::SDManager::Instance().SaveData(myFloat,  GET_VARIABLE_NAME(myFloat));
+    utils::SDManager::Instance().SaveData(myBool,   GET_VARIABLE_NAME(myBool));*/
 
-    auto loaded_data = utils::SDManager::Instance().LoadData("double", "var");
-    auto converted_data = std::to_string(loaded_data._double);
-    LOG(converted_data, LFlags::INFO);
+    
+    auto loaded_int    = utils::SDManager::Instance().LoadData("int", "myInt");
+    auto loaded_float  = utils::SDManager::Instance().LoadData("float", "myFloat");
+    auto loaded_double = utils::SDManager::Instance().LoadData("double", "myadDouble");
+    auto loaded_bool   = utils::SDManager::Instance().LoadData("bool", "myBool");
+
+
+
+    auto converted_double = std::to_string(loaded_double._double);
+    auto converted_int    = std::to_string(loaded_int._int);
+    auto converted_float  = std::to_string(loaded_float._float);
+    auto converted_bool   = std::to_string(loaded_bool._bool);
+
+
+    LOG(converted_double, LFlags::INFO);
+    LOG(converted_int,    LFlags::INFO);
+    LOG(converted_float,  LFlags::INFO);
+    LOG(converted_bool,   LFlags::INFO);
+
 
 }

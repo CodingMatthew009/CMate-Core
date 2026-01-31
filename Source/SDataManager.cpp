@@ -1,7 +1,6 @@
 #include "../Include/SDataManager.hpp"
-#include "../Include/MLogger.hpp"
 #include "../Include/General/Enums.hpp"
-#include <any>
+#include <fstream>
 #include <string>
 
 namespace utils
@@ -22,28 +21,6 @@ namespace utils
         file_path = path;
     }
 
-    void SDManager::SaveData(double var)
-    {
-        std::ofstream data_stream;
-        data_stream.open(file_path, std::ios::out);
-
-        if (!data_stream)
-        {
-            LOG("Failed to open SaveFile", LFlags::ERROR);
-        } 
-        else 
-        {
-            data_stream << GET_VARIABLE_NAME(var);
-            data_stream << " ";
-            data_stream << "double";
-            data_stream << " ";
-            data_stream << var;
-
-            save_index++;
-            data_stream.close();
-        }
-    }
-
     SDManager::types SDManager::LoadData(std::string data_type, std::string data_name)
     {
         std::ifstream infile(file_path);
@@ -57,14 +34,14 @@ namespace utils
         {
             std::istringstream iss(line);
             std::string name;
-            iss >> name;
+            std::string type;
+            iss >> name >> type;
 
-            if(name== data_name)
+            if(name == data_name && type == data_type)
             {
-                std::string type;
                 std::string value;
 
-                iss >> type >> value;
+                iss >> value;
 
                 auto uType = types();
                 if (data_type == "double")
@@ -83,9 +60,14 @@ namespace utils
                 {
                     uType._bool = std::stoi(value);
                 }
+                infile.close();
                 return uType;
             }
         }
+
+        auto message = std::format("Couldn't find Data with the name: {} of type : {}", data_name, data_type);
+        LOG(message, LFlags::ERROR);
+        return types();
     }
 
     SDManager::SDManager() {};
