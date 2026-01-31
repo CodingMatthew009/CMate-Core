@@ -10,11 +10,10 @@ namespace utils
     {
         public:
             struct LogEntry {
-                int timestamp;
+                std::string timestamp;
                 std::string message;
                 LFlags log_flag;
             };
-
 
             static Logger& Instance();
 
@@ -25,10 +24,12 @@ namespace utils
 
             void Log(const char* message, LFlags logger_flag);
 
-            std::vector<LogEntry> entries();
+            std::vector<LogEntry> logs() const;
 
         private:
             Logger();
+
+            std::vector<Logger::LogEntry> current_entries;
 
     };
 
