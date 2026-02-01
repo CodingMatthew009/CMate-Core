@@ -21,6 +21,18 @@ namespace utils
         file_path = path;
     }
 
+    void SDManager::ClearSaveFile() const
+    {
+        std::ofstream data_stream;
+
+        //Clear saved data
+        data_stream.open(file_path, std::ios::out);
+        data_stream << "";
+        data_stream.close();
+
+        LOG("Cleared all data inside the save file.", LFlags::INFO);
+    }
+
     SDManager::types SDManager::LoadData(std::string data_type, std::string data_name) const
     {
         std::ifstream infile(file_path); 

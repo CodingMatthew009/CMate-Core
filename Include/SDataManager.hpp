@@ -35,6 +35,8 @@ namespace utils
             void SetSaveFile(std::string path);
             void SetSaveFile(const char* path);
 
+            void ClearSaveFile() const;
+
             //Returns union with different types
             types LoadData(std::string data_type, std::string data_name) const;
 
@@ -44,8 +46,8 @@ namespace utils
             template<typename T> void SaveData(T t, std::string name) const
             {
                 std::ofstream data_stream;
-                data_stream.open(file_path, std::ios::app);
 
+                data_stream.open(file_path, std::ios::app);
                 if (!data_stream)
                 {
                     LOG("Failed to open SaveFile", LFlags::FAILED);
@@ -104,10 +106,4 @@ namespace utils
             SDManager();
             std::string file_path;
     };
-
-    #define SET_SAVE_FILE(path) \
-        SDManager::Instance().SetSaveFile(path);
-
-    //Macro for getting the variable name, may be relocated
-    #define GET_VARIABLE_NAME(Variable) (#Variable)
 }

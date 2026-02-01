@@ -18,4 +18,7 @@ namespace utils::helper
 
         return input;
     }
+
+    //Macro for getting the variable name, may be relocated
+    #define GET_VARIABLE_NAME(Variable) (#Variable)
 }

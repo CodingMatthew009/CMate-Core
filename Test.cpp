@@ -13,6 +13,7 @@ using namespace mathf;
 int main(void)
 {
     auto* local_clock = &utils::Clock::Instance(); // DO NOT REMOVE, initializes class using current time, may be redone using a macro
+    auto* sd_manager = &utils::SDManager::Instance();
 
     local_clock->Sleep(std::chrono::milliseconds(2000));
     LOG("Initialized test script...", utils::LFlags::INFO);
@@ -24,17 +25,17 @@ int main(void)
     std::string myString = "Hello My Friends";
 
     //Initiating savefile
-    SET_SAVE_FILE("/home/cmate/Documents/MateUtilities/Save_File.odt");
-    
+    sd_manager->SetSaveFile("/home/cmate/Documents/MateUtilities/Save_File.odt");
+    sd_manager->ClearSaveFile();
 
     //Saving data for each type
     
-    utils::SDManager::Instance().SaveData(myDouble, GET_VARIABLE_NAME(myDouble));
-    utils::SDManager::Instance().SaveData(myInt,    GET_VARIABLE_NAME(myInt));
-    utils::SDManager::Instance().SaveData(myFloat,  GET_VARIABLE_NAME(myFloat));
-    utils::SDManager::Instance().SaveData(myBool,   GET_VARIABLE_NAME(myBool));
+    sd_manager->SaveData(myDouble, GET_VARIABLE_NAME(myDouble));
+    sd_manager->SaveData(myInt,    GET_VARIABLE_NAME(myInt));
+    sd_manager->SaveData(myFloat,  GET_VARIABLE_NAME(myFloat));
+    sd_manager->SaveData(myBool,   GET_VARIABLE_NAME(myBool));
 
-    utils::SDManager::Instance().SaveData(myString,   GET_VARIABLE_NAME(myString));
+    sd_manager->SaveData(myString,   GET_VARIABLE_NAME(myString));
 
     LOG("Saved Data to file!", LFlags::INFO);
     local_clock->Sleep(std::chrono::milliseconds(1000));
@@ -42,12 +43,12 @@ int main(void)
 
     //Loading data based on name and type 
     
-    auto loaded_int      = std::get<int>    (utils::SDManager::Instance().LoadData("int", "myInt"));
-    auto loaded_float  = std::get<float>  (utils::SDManager::Instance().LoadData("float", "myFloat"));
-    auto loaded_double= std::get<double> (utils::SDManager::Instance().LoadData("double", "myDouble"));
-    auto loaded_bool     = std::get<int>    (utils::SDManager::Instance().LoadData("bool", "myBool"));
+    auto loaded_int      = std::get<int>    (sd_manager->LoadData("int", "myInt"));
+    auto loaded_float  = std::get<float>  (sd_manager->LoadData("float", "myFloat"));
+    auto loaded_double= std::get<double> (sd_manager->LoadData("double", "myDouble"));
+    auto loaded_bool     = std::get<int>    (sd_manager->LoadData("bool", "myBool"));
 
-    auto loaded_string= std::get<std::string> (utils::SDManager::Instance().LoadData("string", "myString"));
+    auto loaded_string= std::get<std::string> (sd_manager->LoadData("string", "myString"));
 
 
     //Converting them to string (For Logging purpose)
