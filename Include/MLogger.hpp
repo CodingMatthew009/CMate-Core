@@ -9,6 +9,7 @@ namespace utils
     class Logger 
     {
         public:
+            //Struct for storing entry data
             struct LogEntry {
                 std::string timestamp;
                 std::string message;
@@ -24,15 +25,18 @@ namespace utils
 
             void Log(const char* message, LFlags logger_flag);
 
+            //Returns vector of logs 
             std::vector<LogEntry> logs() const;
 
         private:
             Logger();
 
+            //Private list of all entries
             std::vector<Logger::LogEntry> current_entries;
 
     };
 
+    //Macro for logging 
     #define LOG(message, logger_flag) \
         Logger::Instance().Log(message, logger_flag)
 }

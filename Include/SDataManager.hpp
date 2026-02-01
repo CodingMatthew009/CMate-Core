@@ -16,6 +16,8 @@ namespace utils
     class SDManager
     {
         public:
+
+            //Union: All members same memory adress, usefull for returning different types from same function
             union types {
                 int _int;
                 float _float;
@@ -31,8 +33,12 @@ namespace utils
             void SetSaveFile(std::string path);
             void SetSaveFile(const char* path);
 
+            //Returns union with different types
             types LoadData(std::string data_type, std::string data_name);
 
+            //Operator overloading using header implemented template
+            //Saving data for different types (int, float, double, bool, string) 
+            //External Function for Classes planed
             template<typename T> void SaveData(T t, std::string name)
             {
                 std::ofstream data_stream;
@@ -54,6 +60,7 @@ namespace utils
                 }
             }
 
+            //Helper Function to convert data type to a string of it, probably will be relocated
             template<typename T> static std::string VarTypeToString(T t)
             {
                 if constexpr (std::is_same_v<T, int>)
@@ -79,5 +86,6 @@ namespace utils
             std::string file_path;
     };
 
+    //Macro for getting the variable name, may be relocated
     #define GET_VARIABLE_NAME(Variable) (#Variable)
 }

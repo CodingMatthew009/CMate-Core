@@ -23,9 +23,11 @@ namespace utils
 
     }; 
 
+    //Macro for getting formatted runtime as a string
     #define FORMATTED_TIME_SINCE_START() \
         Clock::Instance().get_formated_time_since_start()
 
+    //Macro for resetting the runtime
     #define RESET_TIME() \
         Clock::Instance().reset_time()
 }

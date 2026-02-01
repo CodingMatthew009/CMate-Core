@@ -9,12 +9,12 @@ ____________________________________________
     - Basic Clock
     - Color Coded Logger
     - Saving System for Basic Datatypes (int, float, double, bool) 
-       WIP Not Fully Tested!!
+    - String saving using SDManager
 
 ## Planned Utilities:
-    - Class instance saving for SDataManager
-    - Save file for Logger
-    - Current datum for Clock
+    - Class instance saving for SDManager
+    - Save file for Logger handled externally in SDManager
+    - Expand Clock functionalities
 
 
 # Documentation (To be written!)
@@ -26,5 +26,6 @@ ____________________________________________
 
 
 ## Logger
+
 
 

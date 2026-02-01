@@ -23,19 +23,19 @@ namespace utils
 
     SDManager::types SDManager::LoadData(std::string data_type, std::string data_name)
     {
-        std::ifstream infile(file_path);
+        std::ifstream infile(file_path); 
         if (!infile)
         {
             LOG("Failed to open SaveFile", LFlags::ERROR);
         } 
     
         std::string line;
-        while(std::getline(infile, line))
+        while(std::getline(infile, line)) //Go through each line the stream
         {
-            std::istringstream iss(line);
+            std::istringstream iss(line); //Parse the line into words
             std::string name;
             std::string type;
-            iss >> name >> type;
+            iss >> name >> type; //Output fist word to name, second to type
 
             if(name == data_name && type == data_type)
             {

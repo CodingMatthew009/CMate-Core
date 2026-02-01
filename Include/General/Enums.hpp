@@ -2,19 +2,22 @@
 
 #include <string>
 #include <format>
-#include <iostream>
 
 #include "Colors.hpp"
 namespace utils
 {
+    //Flags for logger
     enum class LFlags {
         INFO,
         WARNING,
         ERROR,
-
+        //ISTALLED
+        //FAILED,
+        //SUCCESS,
         UNDEFINED
     };
 
+    //Returns formatted string of flag using colors
     inline std::string format_flag(LFlags flag)
     {
         std::string formatted_string;
