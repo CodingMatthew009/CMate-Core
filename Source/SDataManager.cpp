@@ -21,12 +21,12 @@ namespace utils
         file_path = path;
     }
 
-    SDManager::types SDManager::LoadData(std::string data_type, std::string data_name)
+    SDManager::types SDManager::LoadData(std::string data_type, std::string data_name) const
     {
         std::ifstream infile(file_path); 
         if (!infile)
         {
-            LOG("Failed to open SaveFile", LFlags::ERROR);
+            LOG("Failed to open SaveFile", LFlags::FAILED);
         } 
     
         std::string line;
@@ -43,29 +43,31 @@ namespace utils
 
                 iss >> value;
 
-                auto uType = types();
+                auto _types = types();
                 if (data_type == "double")
                 {
-                    uType = std::stod(value);
+                    _types = std::stod(value);
                 }
                 if (data_type == "int")
                 {
-                    uType = std::stoi(value);
+                    _types = std::stoi(value);
                 }
                 if (data_type == "float")
                 {
-                   uType = std::stof(value);
+                   _types = std::stof(value);
                 }
                 if (data_type == "bool")
                 {
-                    uType = std::stoi(value);
+                    _types = std::stoi(value);
                 }
                 if (data_type == "string")
                 {
-                    uType = helper::strReplace(value, '~', ' ');
+                    _types = helper::strReplace(value, '~', ' ');
                 }
                 infile.close();
-                return uType;
+                std::string message = std::format("Successfully loaded {} from: {}", data_name, file_path);
+                LOG(message, LFlags::SUCCESS);
+                return _types;
             }
         }
 

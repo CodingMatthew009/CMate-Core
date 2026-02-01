@@ -11,9 +11,9 @@ namespace utils
         INFO,
         WARNING,
         ERROR,
-        //ISTALLED
-        //FAILED,
-        //SUCCESS,
+        INSTALLED,
+        FAILED,
+        SUCCESS,
         UNDEFINED
     };
 
@@ -35,6 +35,21 @@ namespace utils
             case (LFlags::ERROR):
             {
                 formatted_string = std::format("[{}ERROR{}]: ", RED, RESET);
+                break;
+            }
+            case (LFlags::INSTALLED):
+            {
+                formatted_string = std::format("[{}INSTALLED{}]: ", GREEN, RESET);
+                break;
+            }
+            case (LFlags::FAILED):
+            {
+                formatted_string = std::format("[{}FAILED{}]: ", RED, RESET);
+                break;
+            }
+            case (LFlags::SUCCESS):
+            {
+                formatted_string = std::format("[{}SUCCESS{}]: ", GREEN, RESET);
                 break;
             }
             case (LFlags::UNDEFINED):

@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <string>
+#include <thread>
 
 namespace utils
 {
@@ -13,11 +14,17 @@ namespace utils
             Clock(const Clock&) = delete;
             Clock &operator=(const Clock&) = delete;
 
-            std::string get_formated_time_since_start();
+            std::string get_formated_time_since_start() const;
+
+            template<typename T> void Sleep(T duration)
+            {
+                std::this_thread::sleep_for(duration);
+            }
 
             void reset_time();
 
             std::chrono::time_point<std::chrono::high_resolution_clock> start_time;
+            std::chrono::time_point<std::chrono::high_resolution_clock> date;
         private:
             Clock();
 
@@ -26,8 +33,4 @@ namespace utils
     //Macro for getting formatted runtime as a string
     #define FORMATTED_TIME_SINCE_START() \
         Clock::Instance().get_formated_time_since_start()
-
-    //Macro for resetting the runtime
-    #define RESET_TIME() \
-        Clock::Instance().reset_time()
 }

@@ -36,19 +36,19 @@ namespace utils
             void SetSaveFile(const char* path);
 
             //Returns union with different types
-            types LoadData(std::string data_type, std::string data_name);
+            types LoadData(std::string data_type, std::string data_name) const;
 
             //Operator overloading using header implemented template
             //Saving data for different types (int, float, double, bool, string) 
             //External Function for Classes planed
-            template<typename T> void SaveData(T t, std::string name)
+            template<typename T> void SaveData(T t, std::string name) const
             {
                 std::ofstream data_stream;
                 data_stream.open(file_path, std::ios::app);
 
                 if (!data_stream)
                 {
-                    LOG("Failed to open SaveFile", LFlags::ERROR);
+                    LOG("Failed to open SaveFile", LFlags::FAILED);
                 } 
                 else 
                 {
@@ -69,6 +69,9 @@ namespace utils
                     data_stream << value;
                     data_stream << "\n";
                     data_stream.close();
+
+                    std::string message = std::format("Successfully wrote {} to: {}", VarTypeToString(t), file_path);
+                    LOG(message, LFlags::SUCCESS);
                 }
             }
 

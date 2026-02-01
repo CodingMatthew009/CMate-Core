@@ -19,7 +19,13 @@ ____________________________________________
 
 # Documentation (To be written!)
 
+
 ## Saving/Loading System:
+
+### Important
+    - Strings cannot contain '~' character!!
+    - 
+
 
 
 ## Vector Docs

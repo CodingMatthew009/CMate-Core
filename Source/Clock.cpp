@@ -10,7 +10,7 @@ namespace utils
         return instance;
     }
 
-    std::string Clock::get_formated_time_since_start()
+    std::string Clock::get_formated_time_since_start() const
     {
         auto duration = std::chrono::high_resolution_clock::now() - start_time;
 
@@ -22,7 +22,7 @@ namespace utils
 
         auto seconds = std::chrono::duration_cast<std::chrono::seconds>(duration);
         
-        std::string formatted_string = std::format("[{}:{}:{}]", hours, minutes, seconds);
+        std::string formatted_string = std::format("[{}H:{}M:{}S]", hours.count(), minutes.count(), seconds.count());
         return formatted_string;
     }
 
@@ -32,6 +32,6 @@ namespace utils
     }
 
     Clock::Clock() {
-        start_time = std::chrono::high_resolution_clock::now();
+        reset_time();
     }
 }
