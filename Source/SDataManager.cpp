@@ -46,19 +46,23 @@ namespace utils
                 auto uType = types();
                 if (data_type == "double")
                 {
-                    uType._double = std::stod(value);
+                    uType = std::stod(value);
                 }
                 if (data_type == "int")
                 {
-                    uType._int = std::stoi(value);
+                    uType = std::stoi(value);
                 }
                 if (data_type == "float")
                 {
-                    uType._float = std::stof(value);
+                   uType = std::stof(value);
                 }
                 if (data_type == "bool")
                 {
-                    uType._bool = std::stoi(value);
+                    uType = std::stoi(value);
+                }
+                if (data_type == "string")
+                {
+                    uType = helper::strReplace(value, '~', ' ');
                 }
                 infile.close();
                 return uType;

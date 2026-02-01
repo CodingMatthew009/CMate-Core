@@ -3,11 +3,13 @@
 #include <fstream>
 #include <cstdlib>
 #include <sstream>
+#include <string>
 #include <variant>
 #include <type_traits>
 
 
 #include "General/Enums.hpp"
+#include "General/Helpers.hpp"
 #include "MLogger.hpp"
 
 
@@ -18,12 +20,12 @@ namespace utils
         public:
 
             //Union: All members same memory adress, usefull for returning different types from same function
-            union types {
-                int _int;
-                float _float;
-                double _double;
-                bool _bool;
-            };
+            using types = std::variant<
+                int,
+                float,
+                double,
+                bool,
+                std::string>;
 
             static SDManager& Instance();
 
@@ -50,11 +52,21 @@ namespace utils
                 } 
                 else 
                 {
+                    T value;
+                    if constexpr(std::is_same_v<T, std::string>)
+                    {
+                        value = helper::strReplace(t, ' ', '~');
+                    }
+                    else 
+                    {
+                        value = t;
+                    }
+
                     data_stream << name;
                     data_stream << " ";
                     data_stream << VarTypeToString(t);
                     data_stream << " ";
-                    data_stream << t;
+                    data_stream << value;
                     data_stream << "\n";
                     data_stream.close();
                 }
@@ -79,12 +91,19 @@ namespace utils
                 {
                     return "bool";
                 }
+                if constexpr (std::is_same_v<T, std::string>)
+                {
+                    return "string";
+                }
             }
 
         private:
             SDManager();
             std::string file_path;
     };
+
+    #define SET_SAVE_FILE(path) \
+        SDManager::Instance().SetSaveFile(path);
 
     //Macro for getting the variable name, may be relocated
     #define GET_VARIABLE_NAME(Variable) (#Variable)
