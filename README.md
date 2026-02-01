@@ -15,7 +15,7 @@ ____________________________________________
     - Class instance saving for SDManager
     - Save file for Logger handled externally in SDManager
     - Expand Clock functionalities
-
+    + Encrypter based on project seed (Hopefully support for encrypted Data Saving)
 
 # Documentation (To be written!)
 
