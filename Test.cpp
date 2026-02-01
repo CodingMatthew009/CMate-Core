@@ -87,4 +87,7 @@ int main(void)
 
     auto decrypted_data = myEncrypter->Decrypt(encrypted_data);
     LOG(decrypted_data, LFlags::INFO);*/
+    delete local_clock;
+    delete sd_manager;
+    delete save_encrypter;
 }
