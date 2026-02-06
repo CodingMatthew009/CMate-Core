@@ -1,14 +1,11 @@
 #pragma once
+#include <vector>
 
 namespace interfaces
 {
     class INoise
     {
         public:
-            void GetImage() const
-            {
-
-            }
 
             int GetSeed() const
             {
@@ -17,13 +14,13 @@ namespace interfaces
 
             double GetValue(int pos_x, int pos_y)
             {
-
+                return value_map[pos_x][pos_y];
             }
 
-        private:
+        protected:
             int seed;
 
-            unsigned char value_map[][];
+            std::vector<std::vector<double>> value_map;
 
     };
 }

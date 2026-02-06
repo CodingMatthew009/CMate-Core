@@ -3,7 +3,7 @@
 #include <string>
 #include <format>
 
-#include "Colors.hpp"
+#include "TerminalColors.hpp"
 namespace utils
 {
     //Flags for logger

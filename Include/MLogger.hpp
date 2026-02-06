@@ -23,9 +23,9 @@ namespace utils
 
             void SetLogsFolder(std::string path);
 
-            void Log(std::string& message, LFlags logger_flag);
+            void Log(std::string& message, LFlags logger_flag=LFlags::UNDEFINED);
 
-            void Log(const char* message, LFlags logger_flag);
+            void Log(const char* message, LFlags logger_flag=LFlags::UNDEFINED);
 
             //Returns vector of logs 
             std::vector<LogEntry> logs() const;
