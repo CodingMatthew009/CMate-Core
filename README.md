@@ -33,8 +33,9 @@ ____________________________________________
 ## Saving/Loading System:
 
 ### Important
-    - Strings cannot contain '~' character!!
-    - 
+```diff
+-Strings cannot contain '~' character!!
+```   - 
 
 
 
@@ -46,6 +47,6 @@ ____________________________________________
 
 ## Noise Maps
 ```diff
-+ Calculated on the CPU, maximum recommended size 200
+-Calculated on the CPU, maximum recommended size 200
 ```
 
