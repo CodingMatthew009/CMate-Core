@@ -1,5 +1,5 @@
 FLAGS = -Wall -std=c++20
-FILES = Sandbox.cpp $(wildcard Source/*.cpp) $(wildcard Source/Math/*.cpp) 
+FILES = Sandbox.cpp $(wildcard Source/*.cpp) $(wildcard Source/Math/*.cpp) $(wildcard Source/Math/ProceduralNoise/*.cpp) 
 FILES_OBJ = $(FILES:.cpp=.o)
 
 Sandbox: $(FILES_OBJ)
@@ -9,4 +9,4 @@ Sandbox: $(FILES_OBJ)
 		g++ $(FLAGS) -c $< -o $@
 
 clean:
-		rm Sandbox Sandbox.o
+		rm Sandbox $(FILES_OBJ)

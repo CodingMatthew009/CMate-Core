@@ -5,6 +5,7 @@
 #include "Include/General/Enums.hpp"
 #include "Include/Math/Vector2.hpp"
 #include "Include/SDataManager.hpp"
+#include "Include/Math/ProceduralNoise/WhiteNoise.hpp"
 #include <thread>
 
 using namespace utils;
@@ -18,6 +19,8 @@ bool myBool = true;
 std::string myString = "Hello My Friends";
 
 Vector2 myVector = Vector2(2, 23);
+
+noise::WhiteNoise myWhiteNoise(500, Vector2(100, 100));
 
 
 int main(void)
@@ -33,7 +36,6 @@ int main(void)
     sd_manager->ClearSaveFile();
 
     LOG("-------------Initialized Mate's Utils-------------", utils::LFlags::INFO);
-
 
     //Saving block
     {

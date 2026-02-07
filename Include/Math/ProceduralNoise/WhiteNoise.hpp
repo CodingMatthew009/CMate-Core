@@ -3,6 +3,7 @@
 #include "INoise.hpp"
 #include "../General.hpp"
 #include "../Vector2.hpp"
+#include "../../Imager.hpp"
 
 #include <cmath>
 
@@ -29,6 +30,7 @@ namespace utils::noise
                 }
 
                 // Pack raw values to image
+                Imager::ValuesToBitmap(value_map, "/home/mate/Projects/Mate-Utils/white_noise.bmp");
             }
     };
 }

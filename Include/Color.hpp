@@ -28,13 +28,19 @@ namespace utils
         return color;
     }
 
-    inline std::vector<Color> ValuesToColors(std::vector<double> values)
+    inline std::vector<std::vector<Color>> ValueMapToPixelMap(std::vector<std::vector<double>> values)
     {
-        std::vector<Color> colors;
-        for (int i = 0; i <= values.size(); i++)
+        std::vector<std::vector<Color>> collumns;
+        for (int c = 0; c < values.size(); c++)
         {
-            colors.push_back(ValueToColor(values[i]));
+            std::vector<Color> pixels;
+            for (int i = 0; i < values[c].size(); i++)
+            {
+                pixels.push_back(ValueToColor(values[c][i]));
+            }
+
+            collumns.push_back(pixels);
         }
-        return colors;
+        return collumns;
     } 
 }
