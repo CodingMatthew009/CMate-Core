@@ -4,6 +4,7 @@
 #include "Include/MLogger.hpp"
 #include "Include/General/Enums.hpp"
 #include "Include/Math/Vector2.hpp"
+#include "Include/Math/Random.hpp"
 #include "Include/SDataManager.hpp"
 #include "Include/Math/ProceduralNoise/WhiteNoise.hpp"
 #include <thread>
@@ -20,7 +21,7 @@ std::string myString = "Hello My Friends";
 
 Vector2 myVector = Vector2(2, 23);
 
-noise::WhiteNoise myWhiteNoise(500, Vector2(100, 100));
+Noise::WhiteNoise myWhiteNoise(500, Vector2(100, 100));
 
 
 int main(void)
@@ -36,6 +37,21 @@ int main(void)
     sd_manager->ClearSaveFile();
 
     LOG("-------------Initialized Mate's Utils-------------", utils::LFlags::INFO);
+
+    myWhiteNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/noise_1.bmp"); // Must be a .bmp file
+
+    int rand_int = Random::iRange(1, 100);
+    int rand_int_seed = Random::iRangeS(1, 100, 412);
+
+    double rand_double = Random::dRange(1, 100);
+    double rand_double_seed = Random::dRangeS(1, 100, 412);
+
+    std::string message = std::format("My random int is: {}, with seed {}.", rand_int, rand_int_seed);
+    LOG(message, LFlags::INFO);
+
+
+    message = std::format("My random double is: {}, with seed {}.", rand_double, rand_double_seed);
+    LOG(message, LFlags::INFO);
 
     //Saving block
     {
@@ -85,12 +101,8 @@ int main(void)
     //Manual Encrypter test
     Encrypter myEncrypter = Encrypter("b210412bn");
     auto encrypted_string = myEncrypter.Encrypt("std::string Data");
-    LOG(encrypted_string, LFlags::INFO);
-
     local_clock->Sleep(std::chrono::seconds(2));
-
     auto decrypted_string = myEncrypter.Decrypt(encrypted_string);
-    LOG(decrypted_string, LFlags::INFO);
 
     //Finnish Sandbox
     delete save_encrypter;

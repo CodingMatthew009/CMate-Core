@@ -1,26 +1,43 @@
 #pragma once
+
+#include "../../Imager.hpp"
+
 #include <vector>
 
-namespace interfaces
+namespace utils
 {
-    class INoise
-    {
-        public:
+    class Imager; //Forward decleration of Imager
 
-            int GetSeed() const
-            {
-                return seed;
-            }
+    namespace Interfaces {
+        class INoise
+        {
+            public:
 
-            double GetValue(int pos_x, int pos_y)
-            {
-                return value_map[pos_x][pos_y];
-            }
+                int GetSeed() const
+                {
+                    return seed;
+                }
 
-        protected:
-            int seed;
+                double GetValue(int pos_x, int pos_y)
+                {
+                    return value_map[pos_x][pos_y];
+                }
 
-            std::vector<std::vector<double>> value_map;
+                void SaveAsImage(std::string path)
+                {
+                    Imager::ValuesToBitmap(value_map, path);
+                }
 
-    };
+                void SaveAsImage(const char* path)
+                {
+                    Imager::ValuesToBitmap(value_map, path);
+                }
+
+            protected:
+                int seed;
+
+                std::vector<std::vector<double>> value_map;
+
+        };
+    }  
 }
