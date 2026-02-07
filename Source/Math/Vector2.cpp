@@ -1,8 +1,11 @@
 #include "../../Include/Math/Vector2.hpp"
 #include <cmath>
+#include <algorithm>
 
 namespace utils::mathf
 {
+    
+
     Vector2::Vector2(double other_x, double other_y)
     {
         x = other_x; y = other_y;
@@ -44,6 +47,7 @@ namespace utils::mathf
         x = other.x; y = other.y;
     }
 
+    // Static functions
     double Vector2::Angle(Vector2 first, Vector2 second)
     {
         double radians = std::acos(dot(first, second) / (first.magnitude() * second.magnitude()));
@@ -59,5 +63,15 @@ namespace utils::mathf
     double Vector2::Distance(Vector2 first, Vector2 second)
     {
         return (first - second).magnitude();
+    }
+
+    Vector2 Vector2::SmoothStep(Vector2 from, Vector2 to, double t)
+    {
+        Vector2 result(
+            mathf::SmoothStep(from.x, to.x, t),
+            mathf::SmoothStep(from.x, to.x, t)
+        );
+
+        return result;
     }
 }

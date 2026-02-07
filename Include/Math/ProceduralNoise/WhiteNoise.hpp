@@ -4,7 +4,6 @@
 #include "../General.hpp"
 #include "../Vector2.hpp"
 
-#include <cmath>
 
 using namespace utils::mathf;
 
@@ -16,11 +15,11 @@ namespace utils::Noise
         public:
             WhiteNoise(int seed, Vector2 size)
             {
-                for (int c = 0; c <= size.x; c++)
+                for (int c = 0; c < size.x; c++)
                 {
                     std::vector<double> collumn;
 
-                    for (int p = 0; p <= size.y; p++)
+                    for (int p = 0; p < size.y; p++)
                     {
                         collumn.push_back(
                             fract(

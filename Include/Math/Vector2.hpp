@@ -1,6 +1,8 @@
 #pragma once
 
-#include "./Vector3.hpp"
+#include "Vector3.hpp"
+#include "General.hpp"
+
 namespace utils::mathf
 {
     class Vector3;
@@ -29,12 +31,16 @@ namespace utils::mathf
 
             void set(Vector2& other);
 
+            // Static Functions
             static double Angle(Vector2 first, Vector2 second);
 
             static double dot(Vector2 first, Vector2 second);
 
             static double Distance(Vector2 first, Vector2 second);
 
+            static Vector2 SmoothStep(Vector2 from, Vector2 second, double t);
+
+            // Operator Overloads
             Vector2 operator- (Vector2 other) 
             {
                 return Vector2(this->x - other.x, this->y - other.y);

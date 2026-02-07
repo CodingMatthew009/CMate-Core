@@ -14,5 +14,6 @@ namespace utils::mathf
         static int iRangeS(int min, int max, int seed);
 
         static double dRangeS(double min, double max, int seed);
+
     };
 }

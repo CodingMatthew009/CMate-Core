@@ -1,8 +1,11 @@
 #pragma once
 
 #include "../../Imager.hpp"
+#include "../Vector2.hpp"
+#include "../Random.hpp"
 
 #include <vector>
+#include <cmath>
 
 namespace utils
 {
@@ -40,4 +43,16 @@ namespace utils
 
         };
     }  
+
+    namespace mathf {
+        inline double hash(Vector2 inputVec, int seed)
+        {
+           return fract(
+                    std::sin(
+                        Vector2::dot(inputVec, 
+                            Vector2(Random::dRangeS(0, 1000000, seed + inputVec.x * 35281 + inputVec.y * 97246), 
+                                    Random::dRangeS(0, 1000000, seed + inputVec.x * 28754 + inputVec.y * 21634)
+                                ))* seed));
+        }
+    }
 }
