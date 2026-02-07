@@ -1,5 +1,5 @@
 
-# Mate's Utils (0.2.5) 
+# MateWorks++ (0.2.5) 
 
 WIP C++ library including lots of utilities.
 ____________________________________________
