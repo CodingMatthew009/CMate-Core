@@ -1,7 +1,7 @@
 
 # MateWorks++ (0.2.5) 
 
-WIP C++ library including lots of utilities.
+WIP C++ library.
 ____________________________________________
 
 ## Implemented Utilities:
@@ -15,7 +15,6 @@ ____________________________________________
     - Simple token based Encrypter
 
 ## Must do:
-    - Fix WHite noise
     - Cleanup Imager
     - Add More Noise maps
 
