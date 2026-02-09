@@ -1,51 +1,30 @@
+# CMate-Core [0.2.5]
+My collection of C++ utilities.
+-------------------------------------------------------------------------------------------------------------
 
-# MateWorks++ (0.2.5) 
+#### List of implemented Systems:
+	Logger (Color coded and Logfile saving)
+	SavedDataManager (Allows saving/loading of variables in encrypted files)
+	Basic Clock wrapper
+	Key Based BIT Encryption 
+	Vectors 
+	Procedural Noise Maps (WIP)
+	Encrypter (Basic Bit encryption using a key)
+	Color (Struct used in the Imager)
+	Imager (Save array of Colors to .bmp file)
 
-WIP C++ library.
-____________________________________________
+#### Planned  Utilities
+	Noise Maps: Perlin, Voronoi
+	SDataManager: Struct/Class instance saving
+	Clock functions expanded
+	Imager expanded for more Image editing Functions
 
-## Implemented Utilities:
-    - Vector2 and Vector3
-    - Basic Clock
-    - Color Coded Logger
-    - Saving System for Basic Datatypes (int, float, double, bool) 
-        - Encrypt file using Encrypter (Prevents user editing)
-        - Save file for Logger
-        - String saving using SDManager
-    - Simple token based Encrypter
-
-## Must do:
-    - Cleanup Imager
-    - Add More Noise maps
-
-## Planned Utilities:
-    - Class instance saving for SDManager ? 
-    - Expand Clock functionalities
-    - Math: Procedural Noise Maps
-
-    - Expand Imager for more Image editing functions (layering)
-    - Wrapper for Random Number generator
-
-# Documentation (To be written!)
-
-
-## Saving/Loading System:
-
-### Important
-```diff
--Strings cannot contain '~' character!!
-```   - 
+#### Also Planned
+	Doxygen documentation
+#### Weakpoints!
+	Strings cannot contain '~' character
+	Carefull with Noise maps [UNSTABLE AT HIGH RESOLUTIONS]
 
 
 
-## Vector Docs
-
-## Logger
-
-## Encrypter
-
-## Noise Maps
-```diff
--Calculated on the CPU, maximum recommended size 200
-```
-
+--------------------------------------------------------------------------
