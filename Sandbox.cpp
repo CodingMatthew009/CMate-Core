@@ -6,9 +6,12 @@
 #include "Include/Math/Vector2.hpp"
 #include "Include/Math/Random.hpp"
 #include "Include/SDataManager.hpp"
+
 #include "Include/Math/ProceduralNoise/WhiteNoise.hpp"
 #include "Include/Math/ProceduralNoise/ValueNoise.hpp"
 #include "Include/Math/ProceduralNoise/PerlinNoise.hpp"
+#include "Include/Math/ProceduralNoise/VoronoiNoise.hpp"
+
 #include <thread>
 
 using namespace cmate::core;
@@ -31,9 +34,11 @@ int main(void)
     Encrypter* save_encrypter = new Encrypter("Mates's Encryption Key");
     SET_LOGS_FOLDER("/home/mate/Projects/Mate-Utils/logs"); // KEEP AT THE TOP, some internal logs may break
 
-    //Noise::WhiteNoise myWhiteNoise(500, Vector2(100, 100)); // Also computed on the CPU but much less work
-    //Noise::ValueNoise myValueNoise(500, Vector2(512, 512), Vector2(50, 50)); // Use carefully, computed on the CPU!!
-    Noise::PerlinNoise myPerlinNoise(500, Vector2(512, 512), Vector2(50, 50));
+    Noise::WhiteNoise myWhiteNoise(500, 100, true); // Also computed on the CPU but much less work
+    Noise::ValueNoise myValueNoise(500, 512, 40, true); // Use carefully, computed on the CPU!!
+    Noise::PerlinNoise myPerlinNoise(500, 512, 50, true);
+    Noise::VoronoiNoise myVoronoiNoise(500, 512, 20, true);
+
 
     //Initiating savefile
     sd_manager->SetSaveFile("/home/mate/Projects/Mate-Utils/Save_File.odt");
@@ -41,10 +46,10 @@ int main(void)
 
     LOG("-------------Initialized CMate-Core-------------", cmate::core::LFlags::INFO);
 
-    //myWhiteNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/noise_1.bmp"); // Must be a .bmp file
-    //myValueNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/value_noise.bmp"); // Must be a .bmp file
+    myWhiteNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/white_noise.bmp"); // Must be a .bmp file
+    myValueNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/value_noise.bmp"); // Must be a .bmp file
     myPerlinNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/perlin_noise.bmp"); // Must be a .bmp file
-
+    myVoronoiNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/voronoi_noise.bmp"); // Must be a .bmp file
 
     int rand_int = Random::iRange(1, 100);
     int rand_int_seed = Random::iRangeS(1, 100, 412);

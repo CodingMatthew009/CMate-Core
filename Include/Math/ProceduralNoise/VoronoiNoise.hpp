@@ -10,34 +10,36 @@ using namespace cmate::core::mathf;
 
 namespace cmate::core::Noise
 {
-    class ValueNoise : public cmate::core::Interfaces::INoise
+    class VoronoiNoise : public cmate::core::Interfaces::INoise
     {
         public:
-            ValueNoise(int seed, unsigned int pixel_size, unsigned int noise_size, double log_gen_time = false)
+            VoronoiNoise(int seed, unsigned int pixel_size, unsigned int noise_size, bool log_gen_time = false)
             {
                 for (int c = 0; c < pixel_size; c++)
                 {
                     std::vector<double> collumn;
-
                     for (int p = 0; p < pixel_size; p++)
                     {
+                        //Meth, dont know what it is, it just works :)
+
                         double noise_x = (c / ((double)pixel_size - 1)) * (double)noise_size;
                         double noise_y = (p / ((double)pixel_size - 1)) * (double)noise_size;
-
                         Vector2 floored_pos = Vector2(std::floor(noise_x), std::floor(noise_y));
-
                         Vector2 fract_coords = Vector2(fract(noise_x), fract(noise_y));
 
-                        Vector2 interpolated_vector = Vector2(SmoothStep(0, 1, fract_coords.x), SmoothStep(0, 1, fract_coords.y));
+                        double res = 0.0;
 
-                        double a = hash(floored_pos, seed);
-                        double b = hash(floored_pos + V2_RIGHT, seed);
-                        double c_ = hash(floored_pos + V2_UP, seed);
-                        double d = hash(floored_pos + V2_ONE, seed);
-
-                        double value = std::lerp(std::lerp(a, b, interpolated_vector.x), std::lerp(c_, d, interpolated_vector.x), interpolated_vector.y);
-
-                        collumn.push_back(value);       
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            for (int i = -1; i <= 1; i++)
+                            {
+                                Vector2 b = Vector2(double(i), double(j));
+                                Vector2 r = b - fract_coords + hash(floored_pos + b, seed);
+                                res += 0.1/pow(Vector2::dot(r, r), 8.0);
+                            }
+                        }
+                        
+                        collumn.push_back(pow(1./res, 0.0625));       
                     }
 
                     value_map.push_back(collumn);
@@ -45,7 +47,7 @@ namespace cmate::core::Noise
 
                 if (log_gen_time)
                 {
-                    LOG("Generation of Value Noise Completed", LFlags::INFO);
+                    LOG("Generation of Voronoi Noise Completed", LFlags::INFO);
                 }
             }
     };

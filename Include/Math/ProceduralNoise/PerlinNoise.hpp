@@ -13,16 +13,16 @@ namespace cmate::core::Noise
     class PerlinNoise : public cmate::core::Interfaces::INoise
     {
         public:
-            PerlinNoise(int seed, Vector2 size, Vector2 noise_size)
+            PerlinNoise(int seed, unsigned int pixel_size, unsigned int noise_size, bool log_gen_time = false)
             {
-                for (int c = 0; c < size.x; c++)
+                for (int c = 0; c < pixel_size; c++)
                 {
                     std::vector<double> collumn;
 
-                    for (int p = 0; p < size.y; p++)
+                    for (int p = 0; p < pixel_size; p++)
                     {
-                        double noise_x = (c / (size.x - 1)) * noise_size.x;
-                        double noise_y = (p / (size.y - 1)) * noise_size.y;
+                        double noise_x = (c / ((double)pixel_size - 1)) * (double)noise_size;
+                        double noise_y = (p / ((double)pixel_size - 1)) * (double)noise_size;
  
                         Vector2 floored_pos = Vector2(std::floor(noise_x), std::floor(noise_y));
 
@@ -45,6 +45,11 @@ namespace cmate::core::Noise
                     }
 
                     value_map.push_back(collumn);
+                }
+
+                if (log_gen_time)
+                {
+                    LOG("Generation of Perlin Noise Completed", LFlags::INFO);
                 }
             }
     };
