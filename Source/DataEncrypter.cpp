@@ -1,6 +1,6 @@
 #include "../Include/DataEncrypter.hpp"
 
-namespace utils
+namespace cmate::core
 {
     Encrypter::Encrypter(std::string encryption_token)
     {

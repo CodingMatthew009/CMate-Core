@@ -3,7 +3,7 @@
 #include "Vector3.hpp"
 #include "General.hpp"
 
-namespace utils::mathf
+namespace cmate::core::mathf
 {
     class Vector3;
 
@@ -46,9 +46,19 @@ namespace utils::mathf
                 return Vector2(this->x - other.x, this->y - other.y);
             }
 
+            Vector2 operator- (double value)
+            {
+                return Vector2(this->x - value, this->y - value);
+            }
+
             Vector2 operator+ (Vector2 other) 
             {
                 return Vector2(this->x + other.x, this->y + other.y);
+            }
+
+            Vector2 operator+ (double value)
+            {
+                return Vector2(this->x + value, this->y + value);
             }
 
             Vector2 operator* (double factor) 
@@ -70,3 +80,5 @@ namespace utils::mathf
             #define V2_ZERO Vector2(0, 0)
     }; 
 }
+
+#include "General.inl"  // Implement inline functions after Vector2 and 3 Exist, (.inl => .hpp)

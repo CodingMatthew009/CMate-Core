@@ -2,7 +2,7 @@
 #include <string>
 
 
-namespace utils::helper
+namespace cmate::core::helper
 {
     static inline std::string strReplace(std::string input, 
                                         char charToReplace, 

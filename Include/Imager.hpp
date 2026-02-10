@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-namespace utils
+namespace cmate::core
 {
     class Imager
     {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vector2.hpp"
-namespace utils::mathf
+namespace cmate::core::mathf
 {
     class Vector2;
 

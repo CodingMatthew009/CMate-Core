@@ -4,6 +4,7 @@
 *.o
 *.bin
 Sandbox
+.clangd
 
 
 #Folders

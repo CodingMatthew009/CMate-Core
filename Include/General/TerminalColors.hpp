@@ -1,6 +1,6 @@
 
 
-namespace  utils
+namespace  cmate::core
 {
     //Terminal Color codes for logger
     #define RESET "\x1b[0m"

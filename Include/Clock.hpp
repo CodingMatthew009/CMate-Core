@@ -4,7 +4,7 @@
 #include <string>
 #include <thread>
 
-namespace utils
+namespace cmate::core
 {
     class Clock
     {

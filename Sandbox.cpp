@@ -8,9 +8,10 @@
 #include "Include/SDataManager.hpp"
 #include "Include/Math/ProceduralNoise/WhiteNoise.hpp"
 #include "Include/Math/ProceduralNoise/ValueNoise.hpp"
+#include "Include/Math/ProceduralNoise/PerlinNoise.hpp"
 #include <thread>
 
-using namespace utils;
+using namespace cmate::core;
 using namespace mathf;
 
 
@@ -22,26 +23,28 @@ std::string myString = "Hello My Friends";
 
 Vector2 myVector = Vector2(2, 23);
 
-Noise::WhiteNoise myWhiteNoise(500, Vector2(100, 100)); // Also computed on the CPU but much less work
-Noise::ValueNoise myValueNoise(500, Vector2(300, 300), Vector2(200, 200)); // Use carefully, computed on the CPU!!
-
 
 int main(void)
 {
-    auto* local_clock = &utils::Clock::Instance(); // DO NOT REMOVE, initializes class using current time, may be redone using a macro
-    auto* sd_manager = &utils::SDManager::Instance();
+    auto* local_clock = &cmate::core::Clock::Instance(); // DO NOT REMOVE, initializes class using current time, may be redone using a macro
+    auto* sd_manager = &cmate::core::SDManager::Instance();
     Encrypter* save_encrypter = new Encrypter("Mates's Encryption Key");
     SET_LOGS_FOLDER("/home/mate/Projects/Mate-Utils/logs"); // KEEP AT THE TOP, some internal logs may break
 
+    //Noise::WhiteNoise myWhiteNoise(500, Vector2(100, 100)); // Also computed on the CPU but much less work
+    //Noise::ValueNoise myValueNoise(500, Vector2(512, 512), Vector2(50, 50)); // Use carefully, computed on the CPU!!
+    Noise::PerlinNoise myPerlinNoise(500, Vector2(512, 512), Vector2(50, 50));
 
     //Initiating savefile
     sd_manager->SetSaveFile("/home/mate/Projects/Mate-Utils/Save_File.odt");
     sd_manager->ClearSaveFile();
 
-    LOG("-------------Initialized Mate's Utils-------------", utils::LFlags::INFO);
+    LOG("-------------Initialized CMate-Core-------------", cmate::core::LFlags::INFO);
 
-    myWhiteNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/noise_1.bmp"); // Must be a .bmp file
-    myValueNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/value_noise.bmp"); // Must be a .bmp file
+    //myWhiteNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/noise_1.bmp"); // Must be a .bmp file
+    //myValueNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/value_noise.bmp"); // Must be a .bmp file
+    myPerlinNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/perlin_noise.bmp"); // Must be a .bmp file
+
 
     int rand_int = Random::iRange(1, 100);
     int rand_int_seed = Random::iRangeS(1, 100, 412);

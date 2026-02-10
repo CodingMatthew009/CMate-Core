@@ -2,7 +2,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace utils::mathf
+namespace cmate::core::mathf
 {
     
 

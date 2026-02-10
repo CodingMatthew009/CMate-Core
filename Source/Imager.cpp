@@ -1,6 +1,6 @@
 #include "../Include/Imager.hpp"
 
-namespace utils
+namespace cmate::core
 {
     void Imager::ValuesToBitmap(std::vector<std::vector<double>> value_array, const char* image_path)
     {

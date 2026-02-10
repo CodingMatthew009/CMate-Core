@@ -2,7 +2,7 @@
 
 #include <random>
 
-namespace utils::mathf
+namespace cmate::core::mathf
 {
     class Random
     {

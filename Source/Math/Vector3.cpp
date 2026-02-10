@@ -1,7 +1,7 @@
 #include "../../Include/Math/Vector3.hpp"
 #include <cmath>
 
-namespace utils::mathf
+namespace cmate::core::mathf
 {
     Vector3::Vector3(double other_x, double other_y, double other_z)
     {

@@ -3,15 +3,14 @@
 #include "INoise.hpp"
 #include "../General.hpp"
 #include "../Vector2.hpp"
-#include <functional>
 
 
-using namespace utils::mathf;
+using namespace cmate::core::mathf;
 
 
-namespace utils::Noise
+namespace cmate::core::Noise
 {
-    class WhiteNoise : public utils::Interfaces::INoise
+    class WhiteNoise : public cmate::core::Interfaces::INoise
     {
         public:
             WhiteNoise(int seed, Vector2 size)

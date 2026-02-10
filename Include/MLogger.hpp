@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace utils 
+namespace cmate::core 
 {
     class Logger 
     {

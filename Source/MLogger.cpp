@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-namespace utils
+namespace cmate::core
 {
     Logger& Logger::Instance() 
     {

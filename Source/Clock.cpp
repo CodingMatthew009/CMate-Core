@@ -4,7 +4,7 @@
 #include <format>
 #include <string>
 
-namespace utils
+namespace cmate::core
 {
     Clock& Clock::Instance()
     {

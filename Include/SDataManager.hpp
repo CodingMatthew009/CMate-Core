@@ -14,7 +14,7 @@
 #include <string>
 
 
-namespace utils
+namespace cmate::core
 {
     class SDManager
     {

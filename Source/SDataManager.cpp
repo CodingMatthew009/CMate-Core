@@ -1,6 +1,6 @@
 #include "../Include/SDataManager.hpp"
 
-namespace utils
+namespace cmate::core
 {
     SDManager& SDManager::Instance() 
     {

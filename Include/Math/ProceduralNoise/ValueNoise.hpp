@@ -5,12 +5,12 @@
 #include "../Vector2.hpp"
 
 
-using namespace utils::mathf;
+using namespace cmate::core::mathf;
 
 
-namespace utils::Noise
+namespace cmate::core::Noise
 {
-    class ValueNoise : public utils::Interfaces::INoise
+    class ValueNoise : public cmate::core::Interfaces::INoise
     {
         public:
             ValueNoise(int seed, Vector2 size, Vector2 noise_size)

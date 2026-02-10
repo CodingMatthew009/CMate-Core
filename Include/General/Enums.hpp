@@ -4,7 +4,7 @@
 #include <format>
 
 #include "TerminalColors.hpp"
-namespace utils
+namespace cmate::core
 {
     //Flags for logger
     enum class LFlags {

@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace utils
+namespace cmate::core
 {
     struct Color
     {

@@ -1,7 +1,7 @@
 #include "../../Include/Math/Random.hpp"
 #include <random>
 
-namespace utils::mathf 
+namespace cmate::core::mathf 
 {
     int Random::iRange(int min, int max)
     {

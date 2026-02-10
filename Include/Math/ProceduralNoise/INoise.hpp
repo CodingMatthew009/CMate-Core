@@ -7,7 +7,7 @@
 #include <vector>
 #include <cmath>
 
-namespace utils
+namespace cmate::core
 {
     class Imager; //Forward decleration of Imager
 
@@ -46,7 +46,7 @@ namespace utils
 
     namespace mathf {
 
-        // Hashing function for White-Value Noise
+        // Hashing function for White-Value Noise (Slow and CPU Unfriendly)
         inline double hash(Vector2 inputVec, int seed)
         {
            return fract(
@@ -57,13 +57,21 @@ namespace utils
                                 ))* seed));
         }
 
-        // Hashing function for Perlin Noise
-        inline double hash2D(Vector2 inputVec, int seed)
+        // Hashing function for Perlin Noise (No idea whats going on)
+        inline Vector2 hash2D(Vector2 inputVec, int seed)
         {
-            inputVec = Vector2(Vector2::dot(inputVec, Vector2(Random::dRangeS(0, 1000000, seed + inputVec.x * 35281 + inputVec.y * 97246), Random::dRangeS(0, 1000000, seed + inputVec.x * 28754 + inputVec.y * 21634))),
-                               Vector2::dot(inputVec, Vector2(Random::dRangeS(0, 1000000, seed + inputVec.x * 19823 + inputVec.y * 98573), Random::dRangeS(0, 1000000, seed + inputVec.x * 12384 + inputVec.y * 34202))));
-                                                
-            //return 
+            int x = int(inputVec.x);
+            int y = int(inputVec.y);
+        
+            uint32_t h = seed;
+
+            // Gives huge variation between each coordinate 
+            h ^= x * 374761393u; // Bitwise XOR Operation same as h = h ^ x * ..
+            h ^= y * 668265263u;
+
+            h = (h ^ (h >> 13)) * 1274126177u;
+            double angle = (h & 0xFFFF) / double(0xFFFF) * 2.0 * M_PI; // 0xFFFF = 00000000 00000000 11111111 11111111, so & keeps only 16 bits
+            return Vector2(std::cos(angle), std::sin(angle));
         }
     }
 }
