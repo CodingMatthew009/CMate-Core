@@ -27,4 +27,4 @@ $(SANDBOX): $(FILES_OBJ_SANDBOX) $(LIB)
 		g++ $(FLAGS) -c $< -o $@
 
 clean:
-		rm $(LIB) $(FILES_OBJ) $(SANDBOX) 
+		rm $(LIB) $(FILES_OBJ) $(SANDBOX) $(FILES_OBJ_SANDBOX)

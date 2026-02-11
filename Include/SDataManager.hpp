@@ -47,6 +47,8 @@ namespace cmate::core
             //Returns union with different types
             types LoadData(std::string decrypted_data, std::string data_type, std::string data_name) const;
 
+            std::vector<types> LoadDataBlock(std::string decrypted_data, std::string block_name);
+
             //Operator overloading using header implemented template
             //Saving data for different types (int, float, double, bool, string) 
             //External Function for Classes planed
@@ -70,12 +72,13 @@ namespace cmate::core
                         value = helper::strReplace(t, ' ', '~');
                     }
 
+                    if(nonl) {output_stream << " ";}
                     output_stream << name;
                     output_stream << " ";
                     output_stream << helper::VarTypeToString(t);
                     output_stream << " ";
                     output_stream << value;
-                    if (!nonl) {output_stream << "\n";}
+                    if(!nonl) {output_stream << "\n";}
                     output_stream.close();
                 }
             }
@@ -93,10 +96,11 @@ namespace cmate::core
                 else 
                 {
                     output_stream << instance_name;
-                    output_stream << "   ";
-
-                    (SaveData(variables, "class_member", true), ...); // Variadic Template black magic
-
+                    output_stream << " ";
+                    output_stream.close();
+                    (SaveData(variables, "class_member", true), ...);// Variadic Template black magic
+                    output_stream.open(file_path, std::ios::app);
+                    output_stream << " §"; //Terminates at the end
                     output_stream << "\n";
                     output_stream.close();
                 } 

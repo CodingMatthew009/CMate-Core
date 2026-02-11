@@ -124,5 +124,74 @@ namespace cmate::core
         return types(); //Return empty variant
     }
 
+    std::vector<SDManager::types> SDManager::LoadDataBlock(std::string decrypted_data, std::string block_name)
+    {    
+        std::istringstream data_stream(decrypted_data); //Get stream from the decrypted data
+
+        std::string line;
+        while(std::getline(data_stream, line)) //Go through each line the stream
+        {
+            std::string name;
+            std::string type;
+
+            std::istringstream iss(line); //Parse the line into words
+            iss >> name; //Output fist word to name
+
+            //If correct variable 
+            if(name == block_name)
+            {
+                std::vector<types> block_members;
+                std::string current_word;
+                
+                while (current_word != "§")
+                {
+                    auto member = types();
+                    std::string name_garbage;
+                    std::string type;
+                    std::string value;
+
+                    iss >> name_garbage >> type >> value;
+                    current_word = name_garbage;
+
+
+                    // Create types object for returning any type
+                    auto _types = types();
+                    if (type == "double")
+                    {
+                        member = std::stod(value);
+                    }
+                    else if (type == "int")
+                    {
+                        member = std::stoi(value);
+                    }
+                    else if (type == "float")
+                    {
+                       member = std::stof(value);
+                    }
+                    else if (type == "bool")
+                    {
+                        member = std::stoi(value);
+                    }
+                    else if (type == "string")
+                    {
+                        member = helper::strReplace(value, '~', ' ');
+                    }
+
+                    block_members.push_back(member);
+                }
+
+                block_members.pop_back();
+                std::string message = std::format("Successfully loaded {} from: {}", block_name, file_path);
+                LOG(message, LFlags::SUCCESS);
+                return block_members;
+            }
+        }
+
+        auto message = std::format("Couldn't find Data BLock with the name: {}", block_name);
+        LOG(message, LFlags::ERROR);
+        std::vector<types> null_type;
+        return null_type; //Return empty variant list
+    }
+
     SDManager::SDManager() {};
 }

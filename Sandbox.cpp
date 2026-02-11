@@ -1,6 +1,7 @@
 
 #include "Include/CMate-Core.h"
 
+#include <charconv>
 #include <thread>
 
 using namespace cmate::core;
@@ -35,10 +36,11 @@ int main(void)
         sd_manager->SaveData(myBool,   "myBool");
         sd_manager->SaveData(myString, "myString");
     
-        // Always do after all saving has occured (Following data will be unencrypted)
-        sd_manager->EncryptSaveFile(save_encrypter); 
+        int x = 5;
+        int y = 10;
+        sd_manager->SaveDataBlock("MyVector", x, y);
 
-        //sd_manager->SaveDataBlock("MyVector", myVector.x, myVector.y);
+        sd_manager->EncryptSaveFile(save_encrypter); 
     }
 
     LOG("Saved Data to file!", LFlags::INFO);
@@ -54,6 +56,7 @@ int main(void)
 
     auto loaded_string   = std::get<std::string> (sd_manager->LoadData(decrypted_data, "string", "myString"));
 
+    auto loaded_data_block = sd_manager->LoadDataBlock(decrypted_data, "MyVector");
 
     //Converting them to string (For Logging purpose)
     std::string converted_double = std::to_string(loaded_double);
@@ -63,6 +66,7 @@ int main(void)
 
     std::string converted_string = loaded_string;
 
+
     //Logging using Macro
     LOG(converted_double, LFlags::INFO);
     LOG(converted_int,    LFlags::INFO);
@@ -70,6 +74,13 @@ int main(void)
     LOG(converted_bool,   LFlags::INFO);
     
     LOG(loaded_string,   LFlags::INFO);
+
+    for (auto _data : loaded_data_block)
+    {
+        int data = std::get<int> (_data);
+        std::string converted_data = std::to_string(data);
+        LOG(converted_data, LFlags::INFO);
+    }
 
     local_clock->Sleep(std::chrono::seconds(2));
 
