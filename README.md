@@ -18,9 +18,9 @@ My collection of C++ utilities.
 
 #### Also Planned
 	Doxygen documentation
+	
 #### Weakpoints!
 	Strings cannot contain '~' character
-	Carefull with Noise maps [UNSTABLE AT HIGH RESOLUTIONS]
 
 
 

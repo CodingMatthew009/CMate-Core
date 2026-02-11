@@ -4,8 +4,10 @@ FLAGS = -Wall -std=c++20
 FILES = $(wildcard Source/*.cpp) $(wildcard Source/Math/*.cpp)  
 FILES_OBJ = $(FILES:.cpp=.o)
 
-FILES_SANDBOX = Sandbox.cpp   
+FILES_SANDBOX = Sandbox.cpp  
 FILES_OBJ_SANDBOX = Sandbox.o
+
+ALL = LIB SANDBOX
 
 LIB = cmate-core.a
 SANDBOX = Sandbox
