@@ -50,7 +50,7 @@ namespace cmate::core
             //Operator overloading using header implemented template
             //Saving data for different types (int, float, double, bool, string) 
             //External Function for Classes planed
-            template<typename T> void SaveData(T t, std::string name) const
+            template<typename T> void SaveData(T t, std::string name, bool nonl = false) const
             {
                 std::ofstream output_stream;
 
@@ -75,9 +75,31 @@ namespace cmate::core
                     output_stream << helper::VarTypeToString(t);
                     output_stream << " ";
                     output_stream << value;
-                    output_stream << "\n";
+                    if (!nonl) {output_stream << "\n";}
                     output_stream.close();
                 }
+            }
+
+            // Variadic template for unset amount of paramaters
+            template<typename... member> void SaveDataBlock(const char* instance_name, member&... variables)
+            {
+                std::ofstream output_stream;
+
+                output_stream.open(file_path, std::ios::app);
+                if (!output_stream)
+                {
+                    LOG("Failed to open SaveFile", LFlags::FAILED);
+                } 
+                else 
+                {
+                    output_stream << instance_name;
+                    output_stream << "   ";
+
+                    (SaveData(variables, "class_member", true), ...); // Variadic Template black magic
+
+                    output_stream << "\n";
+                    output_stream.close();
+                } 
             }
 
         private:

@@ -3,14 +3,8 @@
 #include "Include/DataEncrypter.hpp"
 #include "Include/MLogger.hpp"
 #include "Include/General/Enums.hpp"
-#include "Include/Math/Vector2.hpp"
 #include "Include/Math/Random.hpp"
 #include "Include/SDataManager.hpp"
-
-#include "Include/Math/ProceduralNoise/WhiteNoise.hpp"
-#include "Include/Math/ProceduralNoise/ValueNoise.hpp"
-#include "Include/Math/ProceduralNoise/PerlinNoise.hpp"
-#include "Include/Math/ProceduralNoise/VoronoiNoise.hpp"
 
 #include <thread>
 
@@ -24,8 +18,6 @@ float myFloat = 23.42;
 bool myBool = true;
 std::string myString = "Hello My Friends";
 
-Vector2 myVector = Vector2(2, 23);
-
 
 int main(void)
 {
@@ -34,35 +26,11 @@ int main(void)
     Encrypter* save_encrypter = new Encrypter("Mates's Encryption Key");
     SET_LOGS_FOLDER("/home/mate/Projects/Mate-Utils/logs"); // KEEP AT THE TOP, some internal logs may break
 
-    Noise::WhiteNoise myWhiteNoise(500, 100, true); // Also computed on the CPU but much less work
-    Noise::ValueNoise myValueNoise(500, 512, 40, true); // Use carefully, computed on the CPU!!
-    Noise::PerlinNoise myPerlinNoise(500, 512, 50, true);
-    Noise::VoronoiNoise myVoronoiNoise(500, 512, 20, true);
-
-
     //Initiating savefile
     sd_manager->SetSaveFile("/home/mate/Projects/Mate-Utils/Save_File.odt");
     sd_manager->ClearSaveFile();
 
     LOG("-------------Initialized CMate-Core-------------", cmate::core::LFlags::INFO);
-
-    myWhiteNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/white_noise.bmp"); // Must be a .bmp file
-    myValueNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/value_noise.bmp"); // Must be a .bmp file
-    myPerlinNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/perlin_noise.bmp"); // Must be a .bmp file
-    myVoronoiNoise.SaveAsImage("/home/mate/Projects/Mate-Utils/voronoi_noise.bmp"); // Must be a .bmp file
-
-    int rand_int = Random::iRange(1, 100);
-    int rand_int_seed = Random::iRangeS(1, 100, 412);
-
-    double rand_double = Random::dRange(1, 100);
-    double rand_double_seed = Random::dRangeS(1, 100, 412);
-
-    std::string message = std::format("My random int is: {}, with seed {}.", rand_int, rand_int_seed);
-    LOG(message, LFlags::INFO);
-
-
-    message = std::format("My random double is: {}, with seed {}.", rand_double, rand_double_seed);
-    LOG(message, LFlags::INFO);
 
     //Saving block
     {
@@ -74,6 +42,8 @@ int main(void)
     
         // Always do after all saving has occured (Following data will be unencrypted)
         sd_manager->EncryptSaveFile(save_encrypter); 
+
+        //sd_manager->SaveDataBlock("MyVector", myVector.x, myVector.y);
     }
 
     LOG("Saved Data to file!", LFlags::INFO);

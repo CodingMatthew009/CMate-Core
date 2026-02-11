@@ -7,14 +7,11 @@ My collection of C++ utilities.
 	SavedDataManager (Allows saving/loading of variables in encrypted files)
 	Basic Clock wrapper
 	Key Based BIT Encryption 
-	Vectors 
-	Procedural Noise Maps (WIP)
 	Encrypter (Basic Bit encryption using a key)
 	Color (Struct used in the Imager)
 	Imager (Save array of Colors to .bmp file)
 
 #### Planned  Utilities
-	Noise Maps: Perlin, Voronoi
 	SDataManager: Struct/Class instance saving
 	Clock functions expanded
 	Imager expanded for more Image editing Functions
