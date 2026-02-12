@@ -17,7 +17,7 @@ std::string myString = "Hello My Friends";
 
 int main(void)
 {
-    auto* local_clock = &cmate::core::Clock::Instance(); // DO NOT REMOVE, initializes class using current time, may be redone using a macro
+    auto* local_clock = &cmate::core::PClock::Instance(); // DO NOT REMOVE, initializes class using current time, may be redone using a macro
     auto* sd_manager = &cmate::core::SDManager::Instance();
     Encrypter* save_encrypter = new Encrypter("Mates's Encryption Key");
     SET_LOGS_FOLDER("/home/mate/Projects/Mate-Utils/logs"); // KEEP AT THE TOP, some internal logs may break
@@ -27,6 +27,12 @@ int main(void)
     sd_manager->ClearSaveFile();
 
     LOG("-------------Initialized CMate-Core-------------", cmate::core::LFlags::INFO);
+
+
+
+    /*TimedTask myTask("myTask", std::chrono::seconds(10), [] { 
+        LOG("Executed task!", LFlags::SUCCESS);
+    });*/
 
     //Saving block
     {

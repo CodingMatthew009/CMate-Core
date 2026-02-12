@@ -6,13 +6,24 @@
 
 namespace cmate::core
 {
-    Clock& Clock::Instance()
+
+    Timer::Timer() {
+        reset_timer();
+    }
+
+    void Timer::reset_timer()
     {
-        static Clock instance;
+        start_time = std::chrono::high_resolution_clock::now();
+    }
+
+
+    PClock& PClock::Instance()
+    {
+        static PClock instance;
         return instance;
     }
 
-    std::string Clock::get_formated_time_since_start() const
+    std::string PClock::get_formated_time_since_start() const
     {
         auto duration = std::chrono::high_resolution_clock::now() - start_time;
 
@@ -28,7 +39,7 @@ namespace cmate::core
         return formatted_string;
     }
 
-    std::string Clock::get_formated_date_and_time() const
+    std::string PClock::get_formated_date_and_time() const
     {
         auto date = std::chrono::system_clock::now();
         auto time_to_date = std::chrono::system_clock::to_time_t(date);
@@ -37,12 +48,12 @@ namespace cmate::core
         return string_date;
     }
 
-    void Clock::reset_time() 
+    void PClock::reset_clock() 
     {
         start_time = std::chrono::high_resolution_clock::now();
     }
 
-    Clock::Clock() {
-        reset_time();
+    PClock::PClock() {
+        reset_clock();
     }
 }

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <format>
+#include <chrono>
 
 #include "TerminalColors.hpp"
 namespace cmate::core
@@ -16,6 +17,7 @@ namespace cmate::core
         SUCCESS,
         UNDEFINED
     };
+
 
     //Returns formatted string of flag using colors
     inline std::string format_flag(LFlags flag)

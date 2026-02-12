@@ -13,7 +13,7 @@ namespace cmate::core
     void Logger::SetLogsFolder(std::string path)
     {
         logs_path = path;
-        current_file = logs_path + "/" + FORMATTED_DATE_AND_TIME_SINCE_START() + ".txt";
+        current_file = logs_path + "/" + FORMATTED_DATE_AND_TIME() + ".txt";
     }
 
     std::vector<Logger::LogEntry> Logger::logs() const {
