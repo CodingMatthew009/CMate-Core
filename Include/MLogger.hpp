@@ -27,7 +27,7 @@ namespace cmate::core
             void SetLogsFolder(std::string path);
 
             template<typename type>
-            void Log(const type& message, LFlags logger_flag)
+            inline void Log(const type& message, LFlags logger_flag)
             {
                 std::string time = FORMATTED_TIME_SINCE_START();
                 std::string flag = format_flag(logger_flag);
