@@ -34,6 +34,18 @@ int main(void)
         LOG("Executed task!", LFlags::SUCCESS);
     });*/
 
+
+    std::vector<double> test_array = {
+        0, 1, 0, 1, 0, 
+        1, 0, 1, 0, 1,
+        0, 1, 0, 1, 0, 
+        1, 0, 1, 0, 1,
+        0, 1, 0, 1, 0
+    };
+
+    int width = 5;
+    Imager::ValuesToBitmap(test_array, width, "/home/mate/Projects/Mate-Utils/test.bmp");
+
     //Saving block
     {
         sd_manager->SaveData(myDouble, "myDouble"); //Name can be any string

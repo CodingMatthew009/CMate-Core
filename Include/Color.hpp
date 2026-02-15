@@ -80,35 +80,23 @@ namespace cmate::core
         return value;
     }
 
-    inline std::vector<std::vector<Color>> ValueMapToPixelMap(std::vector<std::vector<double>> values)
+    inline std::vector<Color> ValueMapToPixelMap(std::vector<double> values)
     {
-        std::vector<std::vector<Color>> collumns;
+        std::vector<Color> pixels;
         for (int c = 0; c < values.size(); c++)
         {
-            std::vector<Color> pixels;
-            for (int i = 0; i < values[c].size(); i++)
-            {
-                pixels.push_back(ValueToColor(values[c][i]));
-            }
-
-            collumns.push_back(pixels);
+            pixels.push_back(ValueToColor(values[c]));
         }
-        return collumns;
+        return pixels;
     } 
 
-    inline std::vector<std::vector<double>> PixelMapToValueMap(std::vector<std::vector<Color>> pixels)
+    inline std::vector<double> PixelMapToValueMap(std::vector<Color> pixels)
     {
-        std::vector<std::vector<double>> collumns;
-        for (int c = 0; c < pixels.size(); c++)
+        std::vector<double> values;
+        for (int i = 0; i < pixels.size(); i++)
         {
-            std::vector<double> colors;
-            for (int i = 0; i < pixels[c].size(); i++)
-            {
-                colors.push_back(ColorToValue(pixels[c][i]));
-            }
-
-            collumns.push_back(colors);
+            values.push_back(ColorToValue(pixels[i]));
         }
-        return collumns;
+        return values;
     } 
 }
