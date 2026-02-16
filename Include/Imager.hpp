@@ -54,8 +54,8 @@ namespace cmate::core
 
         static void SaveImage(Image& image, const char* image_path);
 
-        static Image LayerImages(Image image1, Image image2);
+        static Image LayerImages(Image& image1, Image& image2);
 
-        static Image Filter(std::vector<Color> image, ColorRange low, ColorRange high)
+        static Image Filter(Image& image, ColorRange range);
     };
 }

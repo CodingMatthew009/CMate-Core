@@ -24,7 +24,7 @@ namespace cmate::core
             R = red; G = green; B = blue;
         }
 
-        inline Color operator+(Color other)
+        inline Color operator+(Color& other)
         {
             Color result(
                 R + other.R,
@@ -35,7 +35,7 @@ namespace cmate::core
             return result;
         }
 
-        inline Color operator-(Color other)
+        inline Color operator-(Color& other)
         {
             Color result(
                 R - other.R,
@@ -57,7 +57,7 @@ namespace cmate::core
             return result;
         }
 
-        inline Color SmoothStep(Color from, Color to, double t)
+        inline Color SmoothStep(Color& from, Color& to, double t)
         {
             Color result(
                 mathf::SmoothStep(from.R, to.R, t),
@@ -69,6 +69,61 @@ namespace cmate::core
         }
     };
 
+    inline bool operator< (Color& color1, Color& color2)
+    {
+        if (color1.R < color2.R &&
+            color1.G < color2.G &&
+            color1.B < color2.B)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    inline bool operator> (Color& color1, Color& color2)
+    {
+        if (color1.R > color2.R &&
+            color1.G > color2.G &&
+            color1.B > color2.B)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    inline bool operator<= (Color& color1, Color& color2)
+    {
+        if (color1.R <= color2.R &&
+            color1.G <= color2.G &&
+            color1.B <= color2.B)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    inline bool operator>= (Color& color1, Color& color2)
+    {
+        if (color1.R >= color2.R &&
+            color1.G >= color2.G &&
+            color1.B >= color2.B)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    inline bool operator== (Color& color1, Color& color2)
+    {
+        if (color1.R == color2.R &&
+            color1.G == color2.G &&
+            color1.B == color2.B)
+        {
+            return true;
+        }
+        return false;
+    }    
+
     inline Color ValueToColor(double value)
     {
         Color color(
@@ -79,7 +134,7 @@ namespace cmate::core
         return color;
     }
 
-    inline double ColorToValue(Color color)
+    inline double ColorToValue(Color& color)
     {
         double value = (double)(color.R + color.G + color.B) / 3 / 255;
         return value;

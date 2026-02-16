@@ -73,8 +73,6 @@ namespace cmate::core
         highColor = other.highColor;
     }
 
-
-
     void Imager::SaveImage(Image& image, const char* image_path)
     {
         std::fstream image_stream;
@@ -132,5 +130,35 @@ namespace cmate::core
             image_stream.close();
         }
 
+    }
+
+    Image Imager::LayerImages(Image& image1, Image& image2)
+    {
+        std::vector<Color> new_pixels;
+        for (int i = 0; i < image1.pixel_map.size(); i++)
+        {
+            new_pixels.push_back(image1.pixel_map[i] + image2.pixel_map[i]);
+        }
+
+        return Image(new_pixels, image1.width);
+    }
+
+    Image Imager::Filter(Image& image, ColorRange range)
+    {
+        std::vector<Color> new_pixels;
+        for (int i = 0; i < image.pixel_map.size(); i++)
+        {
+            Color pixel = image.pixel_map[i];
+            if (pixel > range.lowColor && pixel < range.highColor)
+            {
+                new_pixels.push_back(Color(255, 255, 255));
+            }
+            else
+            {
+                new_pixels.push_back(Color(0, 0, 0));
+            }
+        }
+
+        return Image(new_pixels, image.width);
     }
 }
