@@ -49,7 +49,6 @@ namespace cmate::core
         return values;
     } 
 
-
     ColorRange::ColorRange(unsigned int lowR,
                             unsigned int lowG,
                             unsigned int lowB,
@@ -86,7 +85,6 @@ namespace cmate::core
         if (!image_stream) {LOG("Failed to create image file!", LFlags::ERROR);}
         else
         {
-
             // BMP File Header
             {
                 image_stream.put('B');
@@ -128,6 +126,73 @@ namespace cmate::core
                 }
             }
             image_stream.close();
+        }
+
+    }
+
+    Image Imager::LoadImage(const char* image_path, int width)
+    {
+        std::ifstream image_stream;
+
+        image_stream.open(image_path, std::ios::binary);
+
+        if (!image_stream) {LOG("Failed to load Image", LFlags::FAILED);}
+        else 
+        {   
+            char temp[4];
+            char temp2[2];
+            int size_bytes;
+            int data_offset;
+            int info_header_size;
+            int image_width;
+            int image_height;
+            int color_accuracy;
+
+            std::vector<Color> pixels;
+
+            image_stream.ignore(1);
+            image_stream.ignore(1);
+            image_stream.read((char*)&size_bytes, 4);
+            image_stream.ignore(2);
+            image_stream.ignore(2);
+            image_stream.read((char*)&data_offset, 4);
+
+            image_stream.read((char*)&info_header_size, 4);
+            image_stream.read((char*)&image_width, 4);
+            image_stream.read((char*)&image_height, 4);
+            image_stream.ignore(2);
+            image_stream.read((char*)&color_accuracy, 2);
+
+            // Load optional data
+            image_stream.ignore(4);
+            image_stream.ignore(4);
+            image_stream.ignore(4);
+            image_stream.ignore(4);
+            image_stream.ignore(4);
+            image_stream.ignore(4);
+
+            LOG(std::format("Loaded image data width:{}", image_width), LFlags::INFO);
+
+            int row_size = (image_width* 3 + 3) & ~3;
+            for (int x = 0; x < image_width; x++)
+            {
+                for (int y = 0; y < image_height; y++)
+                {
+                    int B, G, R;
+                    image_stream.read((char*)&B, 1);
+                    image_stream.read((char*)&G, 1);
+                    image_stream.read((char*)&R, 1);
+
+                    pixels.push_back(Color(R, G, B));
+                }
+
+                for (int p = image_width * 3; p < row_size; p++)
+                {
+                    image_stream.ignore(row_size - image_width * 3);
+                }
+            }
+
+            return Image(pixels, image_width);
         }
 
     }

@@ -43,10 +43,12 @@ int main(void)
         0, 1, 0, 1, 0
     };
     int width = 5;
-
-
     Image myImage = Image::ValueMapToImage(test_array, width);
     Imager::SaveImage(myImage, "/home/mate/Projects/Mate-Utils/test.bmp");
+    {
+        Image loaded_image = Imager::LoadImage("/home/mate/Projects/CMate-Expanded/perlin_noise.bmp", 512);
+        Imager::SaveImage(loaded_image, "/home/mate/Projects/Mate-Utils/Loaded_Perlin.bmp");
+    }
 
     //Saving block
     {

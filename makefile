@@ -7,7 +7,7 @@ FILES_OBJ = $(FILES:.cpp=.o)
 FILES_SANDBOX = Sandbox.cpp  
 FILES_OBJ_SANDBOX = Sandbox.o
 
-ALL = LIB SANDBOX
+all: lib Sandbox
 
 LIB = cmate-core.a
 SANDBOX = Sandbox

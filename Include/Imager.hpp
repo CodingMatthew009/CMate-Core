@@ -55,8 +55,12 @@ namespace cmate::core
 
         static void SaveImage(Image& image, const char* image_path);
 
+        static Image LoadImage(const char* image_path, int width);
+
         static Image LayerImages(Image& image1, Image& image2);
 
         static Image Filter(Image& image, ColorRange range);
+
+        static Image Colorize(Image& image, ColorRange from, ColorRange to);
     };
 }
