@@ -1,20 +1,22 @@
-# CMate-Core [0.2.8b]
+# CMate-Core [0.2.9]
 My collection of C++ utilities.
 -------------------------------------------------------------------------------------------------------------
 
 #### List of implemented Systems:
 	Logger (Color coded and Logfile saving)
 	SavedDataManager (Allows saving/loading of variables in encrypted files)
+		Struct/Class instance saving [Data Block]
 	Basic Clock wrapper
-	Key Based BIT Encryption 
 	Encrypter (Basic Bit encryption using a key)
-	Color (Struct used in the Imager)
-	Imager (Save array of Colors to .bmp file)
+
+	Imager 
+		Image Editing
+		Image saving/loading
 
 #### Planned  Utilities
-	SDataManager: Struct/Class instance saving
-	Clock functions expanded
-	Imager expanded for more Image editing Functions
+	Image Compression / Resizing
+	Encrypter expanded with more serious encryiption
+	Task Systems
 
 #### Also Planned
 	Doxygen documentation

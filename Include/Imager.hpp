@@ -15,6 +15,16 @@ namespace cmate::core
     const int planes = 1;
     const int color_accuracy = 24;
 
+    enum BlendMode
+    {
+        Additive,
+        Alpha,
+        Subtractive,
+        Multiply,
+        Min,
+        Max
+    };
+
     struct Image
     {
         std::vector<Color> pixel_map;
@@ -57,7 +67,7 @@ namespace cmate::core
 
         static Image LoadImage(const char* image_path, int width);
 
-        static Image LayerImages(Image& image1, Image& image2);
+        static Image LayerImages(Image& image1, Image& image2, BlendMode mode, float alpha=0.5);
 
         static Image Filter(Image& image, ColorRange range);
 

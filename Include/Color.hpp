@@ -57,6 +57,17 @@ namespace cmate::core
             return result;
         }
 
+        inline Color operator*(Color& other)
+        {
+            Color result(
+                R * other.R,
+                G * other.G,
+                B * other.B
+            );
+
+            return result;
+        }
+
         inline Color SmoothStep(Color& from, Color& to, double t)
         {
             Color result(
@@ -138,5 +149,25 @@ namespace cmate::core
     {
         double value = (double)(color.R + color.G + color.B) / 3 / 255;
         return value;
+    }
+
+    inline Color max(Color& first, Color& second)
+    {
+        Color color(
+            std::max(first.R, second.R),
+            std::max(first.G, second.G),
+            std::max(first.B, second.B)
+        );
+        return color;
+    }
+
+    inline Color min(Color& first, Color& second)
+    {
+        Color color(
+            std::min(first.R, second.R),
+            std::min(first.G, second.G),
+            std::min(first.B, second.B)
+        );
+        return color;
     }
 }

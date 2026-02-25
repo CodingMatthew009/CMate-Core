@@ -197,12 +197,50 @@ namespace cmate::core
 
     }
 
-    Image Imager::LayerImages(Image& image1, Image& image2)
+    Image Imager::LayerImages(Image& image1, Image& image2, BlendMode mode, float alpha)
     {
+        // TODO: Convert to RGB format if different format
         std::vector<Color> new_pixels;
         for (int i = 0; i < image1.pixel_map.size(); i++)
         {
-            new_pixels.push_back(image1.pixel_map[i] + image2.pixel_map[i]);
+            Color new_pixel;
+
+            switch (mode)
+            {
+                case BlendMode::Alpha:
+                {
+                    Color first_pixel = image1.pixel_map[i] * alpha;
+                    Color second_pixel = image2.pixel_map[i] * (1 - alpha);
+                    new_pixel = first_pixel + second_pixel;
+                    break;
+                }
+                case BlendMode::Additive:
+                {
+                    new_pixel = image1.pixel_map[i] + image2.pixel_map[i];
+                    break;
+                }
+                case BlendMode::Subtractive:
+                {
+                    new_pixel = image1.pixel_map[i] - image2.pixel_map[i];
+                    break;
+                }
+                case BlendMode::Multiply:
+                {
+                    new_pixel = image1.pixel_map[i] * image2.pixel_map[i];
+                    break;
+                }
+                case BlendMode::Min:
+                {
+                    new_pixel = min(image1.pixel_map[i], image2.pixel_map[i]);
+                    break;
+                }
+                case BlendMode::Max:
+                {
+                    new_pixel = max(image1.pixel_map[i], image2.pixel_map[i]);
+                    break;
+                }
+            }
+            new_pixels.push_back(new_pixel);
         }
 
         return Image(new_pixels, image1.width);
