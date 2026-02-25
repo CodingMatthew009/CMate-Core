@@ -47,13 +47,11 @@ int main(void)
         Image myImage = Image::ValueMapToImage(test_array, width);
         Imager::SaveImage(myImage, "/home/mate/Projects/Mate-Utils/test.bmp");
 
-
-
         Image loaded_perlin = Imager::LoadImage("/home/mate/Projects/CMate-Expanded/perlin_noise.bmp", 512);
         Imager::SaveImage(loaded_perlin, "/home/mate/Projects/Mate-Utils/Loaded_Perlin.bmp");
 
         Image loaded_value = Imager::LoadImage("/home/mate/Projects/CMate-Expanded/value_noise.bmp", 512);
-        Imager::SaveImage(loaded_value, "/home/mate/Projects/Mate-Utils/Loaded_Perlin.bmp");
+        Imager::SaveImage(loaded_value, "/home/mate/Projects/Mate-Utils/Loaded_Value.bmp");
 
         Image blended_image_alpha = Imager::LayerImages(loaded_perlin, loaded_value, BlendMode::Alpha, 0.6);
         Imager::SaveImage(blended_image_alpha, "/home/mate/Projects/Mate-Utils/AlphaBlendedNoise.bmp");
@@ -69,6 +67,11 @@ int main(void)
 
         Image blended_image_min = Imager::LayerImages(loaded_perlin, loaded_value, BlendMode::Min);
         Imager::SaveImage(blended_image_min, "/home/mate/Projects/Mate-Utils/MinBlendedNoise.bmp");
+
+
+
+        Image filtered_perlin = Imager::Filter(loaded_value, ColorRange(120, 120, 120, 255, 255, 255));
+        Imager::SaveImage(filtered_perlin, "/home/mate/Projects/Mate-Utils/image_filtered.bmp");
     }
 
     //***************************************Data Saver/Loader Test****************************************************/    

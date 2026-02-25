@@ -252,7 +252,9 @@ namespace cmate::core
         for (int i = 0; i < image.pixel_map.size(); i++)
         {
             Color pixel = image.pixel_map[i];
-            if (pixel > range.lowColor && pixel < range.highColor)
+            if (pixel.R >= range.lowColor.R && pixel.R <= range.highColor.R &&
+                pixel.G >= range.lowColor.G && pixel.G <= range.highColor.G &&
+                pixel.B >= range.lowColor.B && pixel.B <= range.highColor.B)
             {
                 new_pixels.push_back(Color(255, 255, 255));
             }
@@ -260,6 +262,19 @@ namespace cmate::core
             {
                 new_pixels.push_back(Color(0, 0, 0));
             }
+        }
+
+        return Image(new_pixels, image.width);
+    }
+
+    // TODO
+    Image Imager::Colorize(Image &image, ColorRange from, ColorRange to)
+    {
+        std::vector<Color> new_pixels;
+        for (int i = 0; i < image.pixel_map.size(); i++)
+        {
+            Color pixel = image.pixel_map[i];
+            //double t = Color::SmoothStep(from.lowColor, from.highColor, pixel);
         }
 
         return Image(new_pixels, image.width);

@@ -68,7 +68,7 @@ namespace cmate::core
             return result;
         }
 
-        inline Color SmoothStep(Color& from, Color& to, double t)
+        inline static Color SmoothStep(Color& from, Color& to, double t)
         {
             Color result(
                 mathf::SmoothStep(from.R, to.R, t),
@@ -79,50 +79,6 @@ namespace cmate::core
             return result;
         }
     };
-
-    inline bool operator< (Color& color1, Color& color2)
-    {
-        if (color1.R < color2.R &&
-            color1.G < color2.G &&
-            color1.B < color2.B)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    inline bool operator> (Color& color1, Color& color2)
-    {
-        if (color1.R > color2.R &&
-            color1.G > color2.G &&
-            color1.B > color2.B)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    inline bool operator<= (Color& color1, Color& color2)
-    {
-        if (color1.R <= color2.R &&
-            color1.G <= color2.G &&
-            color1.B <= color2.B)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    inline bool operator>= (Color& color1, Color& color2)
-    {
-        if (color1.R >= color2.R &&
-            color1.G >= color2.G &&
-            color1.B >= color2.B)
-        {
-            return true;
-        }
-        return false;
-    }
 
     inline bool operator== (Color& color1, Color& color2)
     {

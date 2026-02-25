@@ -23,6 +23,7 @@ My collection of C++ utilities.
 	
 #### Weakpoints!
 	Strings cannot contain '~' character
+	Imag filtering/loading only supported for images generated using the lib!
 
 
 
