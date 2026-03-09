@@ -266,7 +266,6 @@ namespace cmate::core
 
         return Image(new_pixels, image.width);
     }
-
     // TODO
     Image Imager::Colorize(Image &image, ColorRange from, ColorRange to)
     {

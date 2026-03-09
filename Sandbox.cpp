@@ -2,6 +2,7 @@
 #include "Include/CMate-Core.h"
 
 #include <charconv>
+#include <chrono>
 #include <thread>
 
 using namespace cmate::core;
@@ -30,9 +31,9 @@ int main(void)
 
 
 
-    /*TimedTask myTask("myTask", std::chrono::seconds(10), [] { 
+    TimedTask myTask("myTask", std::chrono::seconds(10), [] { 
         LOG("Executed task!", LFlags::SUCCESS);
-    });*/
+    });
 
     //***************************************Imager Tests****************************************************/
     {
@@ -68,8 +69,7 @@ int main(void)
         Image blended_image_min = Imager::LayerImages(loaded_perlin, loaded_value, BlendMode::Min);
         Imager::SaveImage(blended_image_min, "/home/mate/Projects/Mate-Utils/MinBlendedNoise.bmp");
 
-
-
+        
         Image filtered_perlin = Imager::Filter(loaded_value, ColorRange(120, 120, 120, 255, 255, 255));
         Imager::SaveImage(filtered_perlin, "/home/mate/Projects/Mate-Utils/image_filtered.bmp");
     }
@@ -138,6 +138,8 @@ int main(void)
         local_clock->Sleep(std::chrono::seconds(2));
         auto decrypted_string = myEncrypter.Decrypt(encrypted_string);
     }
+
+    myTask.join_task();
 
     //Finnish Sandbox
     delete save_encrypter;

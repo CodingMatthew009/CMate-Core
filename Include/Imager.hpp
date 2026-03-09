@@ -42,23 +42,6 @@ namespace cmate::core
         static std::vector<double> ImageToValueMap(Image& image);
     };
 
-    struct ColorRange
-    {
-        Color lowColor;
-        Color highColor;
-
-        ColorRange(unsigned int lowR,
-                   unsigned int lowG,
-                   unsigned int lowB,
-                   unsigned int highR,
-                   unsigned int highG,
-                   unsigned int highB
-                );
-
-        ColorRange(Color& low, Color& high);
-        ColorRange(ColorRange& other);
-    };
-
     class Imager
     {
         public:

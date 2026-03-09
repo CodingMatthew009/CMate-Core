@@ -13,5 +13,6 @@
 #include "Imager.hpp"
 #include "MLogger.hpp"
 #include "SDataManager.hpp"
+#include "TaskSystem.hpp"
 
 #endif

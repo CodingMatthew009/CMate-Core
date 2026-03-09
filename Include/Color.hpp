@@ -1,5 +1,6 @@
 #pragma once
 
+#include <bitset>
 #include <cstdint>
 #include <vector>
 #include <algorithm>
@@ -8,22 +9,36 @@
 
 namespace cmate::core
 {
+    enum ColorSpace
+    {
+        RGB,
+        BGR,
+        RGBA,
+        GRAY,
+        HSV,
+        HSL
+    };
+
+    //      3    3    4     4     4    4   
+    //TODO: RGB, BGR, RGBA, GRAY, HSV, HSL 
     struct Color
     {
         uint8_t R;
         uint8_t G;
         uint8_t B;
 
-        Color() {};
-        Color(uint8_t red, uint8_t green, uint8_t blue)
+        uint8_t A;
+
+        Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha=1)
         {   
             red = std::clamp((int)red, 0, 255);
             green = std::clamp((int)green, 0, 255);
             blue = std::clamp((int)blue, 0, 255);
 
-            R = red; G = green; B = blue;
+            R = red; G = green; B = blue; A = alpha;
         }
 
+        Color() {}
         inline Color operator+(Color& other)
         {
             Color result(
@@ -78,6 +93,22 @@ namespace cmate::core
 
             return result;
         }
+    };
+
+    struct ColorRange
+    {
+        Color lowColor;
+        Color highColor;
+
+        ColorRange(unsigned int lowR,
+                   unsigned int lowG,
+                   unsigned int lowB,
+                   unsigned int highR,
+                   unsigned int highG,
+                   unsigned int highB
+                );
+        ColorRange(Color& low, Color& high);
+        ColorRange(ColorRange& other);
     };
 
     inline bool operator== (Color& color1, Color& color2)
